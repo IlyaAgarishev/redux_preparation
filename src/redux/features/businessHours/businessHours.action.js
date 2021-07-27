@@ -1,15 +1,10 @@
 import * as t from "./constants";
 
-const one = () => {
+const createNewBusinessHours = (item) => {
   return {
-    type: t.SEND_ADD_POST_SUCCESS,
+    type: t.CREATE_NEW_BUSINESS_HOURS,
+    item,
   };
 };
 
-const two = () => {
-  return {
-    type: t.SEND_ADD_POST_ERROR,
-  };
-};
-
-export { one, two };
+export { createNewBusinessHours };

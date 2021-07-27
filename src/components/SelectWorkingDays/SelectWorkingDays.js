@@ -1,20 +1,38 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Span, MD, SM } from "@zendeskgarden/react-typography";
+import { createNewBusinessHours } from "../../redux/features/businessHours";
+import initialBusinessHours from "./initialBusinessHours";
 
 import "./SelectWorkingDays.scss";
 
-const initialState = [
+const daysToMap = [
   { short: "Sun", full: "Sunday", active: false, id: 0 },
-  { short: "Mon", full: "Monday", active: true, id: 1 },
-  { short: "Tue", full: "Tuesday", active: true, id: 2 },
-  { short: "Wed", full: "Wednesday", active: true, id: 3 },
-  { short: "Thu", full: "Thursday", active: true, id: 4 },
-  { short: "Fri", full: "Friday", active: true, id: 5 },
+  { short: "Mon", full: "Monday", active: false, id: 1 },
+  { short: "Tue", full: "Tuesday", active: false, id: 2 },
+  { short: "Wed", full: "Wednesday", active: false, id: 3 },
+  { short: "Thu", full: "Thursday", active: false, id: 4 },
+  { short: "Fri", full: "Friday", active: false, id: 5 },
   { short: "Sat", full: "Saturday", active: false, id: 6 },
 ];
 
 const SelectWorkingDays = () => {
-  const [days, setDays] = useState(initialState);
+  const idsOfActiveDays = useMemo(
+    () => initialBusinessHours.workingTime.map(({ weekday }) => weekday),
+    [initialBusinessHours.workingTime]
+  );
+
+  const rebuildDaysToMap = useMemo(() => {
+    return daysToMap.map((el) => {
+      const elementIsActive = idsOfActiveDays.some(
+        (number) => number === el.id
+      );
+
+      return { ...el, active: elementIsActive };
+    });
+  }, [initialBusinessHours.workingTime]);
+
+  const [days, setDays] = useState(rebuildDaysToMap);
 
   const activeDaysCount = useMemo(() => {
     let count = 0;
@@ -44,12 +62,14 @@ const SelectWorkingDays = () => {
             </div>
           );
         })}
+
         <div className="select-working-days_count">
           <SM color="grey">
             <Span hue="grey">({activeDaysCount} days selected)</Span>
           </SM>
         </div>
       </div>
+      <button>create</button>
     </div>
   );
 };

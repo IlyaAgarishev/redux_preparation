@@ -1,17 +1,3 @@
-import {
-  toggleAddPostForm,
-  setTitleAddPostForm,
-  setTextAddPostForm,
-  setCategoryAddPostForm,
-  sendAddPost,
-  toggleWarningPopup
-} from "./addPostForm.action";
+import { createNewBusinessHours } from "./businessHours.action";
 
-export {
-  toggleAddPostForm,
-  setTitleAddPostForm,
-  setTextAddPostForm,
-  setCategoryAddPostForm,
-  sendAddPost,
-  toggleWarningPopup
-};
+export { createNewBusinessHours };
