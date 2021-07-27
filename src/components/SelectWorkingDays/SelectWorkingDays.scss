@@ -1,0 +1,26 @@
+.select-working-days {
+  &_list {
+    padding: 20px;
+    display: flex;
+  }
+
+  &_count {
+    align-self: center;
+    margin-left: 10px;
+  }
+
+  &_day {
+    background: white;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: 1px solid #1f73b7;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #1f73b7;
+
+    &__active {
+      background: #1f73b7;
+      color: white;
+    }
+  }
+}

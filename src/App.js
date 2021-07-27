@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { useState } from "react";
+import SelectWorkingDays from "./components/SelectWorkingDays";
+import TimePicker from "react-time-picker";
+import "./App.scss";
 
 function App() {
+  const [value, setValue] = useState("10:00");
+
+  const timePicker = (
+    <TimePicker
+      onChange={setValue}
+      value={value}
+      disableClock
+      clearIcon={null}
+      format="hh:mm a"
+    />
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <SelectWorkingDays />
     </div>
   );
 }
